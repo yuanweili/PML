@@ -168,14 +168,21 @@ knnFit1 <- train(trainPC, TrainClasses,
 
 Sys.time()
 
-testPC <- predict(preProc,testing[,-53])
+
 
 ```
 
-#### Performance of the final model based on knn.
-- The out of sample error rate is 4.18%.
-```{r,echo=TRUE, results='markup'}
 
+#### The in sample error rate is around 2.2 % (1 - Accuracy). I will expect the error rate for out of sample data to be slightly higher. 
+```{r,echo=TRUE, results='markup'}
+confusionMatrix(TrainClasses,predict(knnFit1,trainPC))
+```
+
+
+#### Performance of the final model based on knn.
+- The out of sample error rate is 4.9%.
+```{r,echo=TRUE, results='markup'}
+testPC <- predict(preProc,testing[,-53])
 confusionMatrix(testing$classe,predict(knnFit1,testPC))
 
 ```
